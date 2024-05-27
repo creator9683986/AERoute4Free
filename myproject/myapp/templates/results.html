@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AERoute4Free</title>
+    <style>
+        body {
+            background-color: #c6f4ff;
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            margin-top: 50px;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 48px;
+            font-family: 'Text Me One', sans-serif;
+            text-shadow: 0px 0px 16.8px #043dde;
+            text-align: center;
+        }
+
+        .user-text {
+            margin-bottom: 20px;
+        }
+
+        .highlight {
+            text-decoration: underline;
+            font-weight: bold;
+        }
+
+        .list-group {
+            display: table;
+            margin: 0 auto;
+        }
+
+        .list-group-item {
+            border-color: #dee2e6;
+            background-color: #fff;
+            margin-bottom: 10px;
+            padding: 15px;
+        }
+
+        .list-group-item h2 {
+            font-size: 24px;
+            color: black;
+            margin-bottom: 10px;
+        }
+
+        .list-group-item p {
+            margin-bottom: 5px;
+        }
+
+        .no-results {
+            margin-top: 20px;
+            font-size: 18px;
+            color: #6c757d;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th, td {
+            border: 1px solid #dee2e6;
+            padding: 12px;
+            text-align: left;
+            background-color: #fff;
+        }
+
+        th {
+            background-color: #f8f9fa;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>AERoute4Free</h1>
+        <div class="user-text">
+            <p>{{ user_input }}</p>
+        </div>
+        {% if medicaments_data %}
+            <table>
+                <tr>
+                    <th>Name</th>
+                    <th>Obligation</th>
+                    <th>Comment</th>
+                    <th>AE Source Countries</th>
+                    <th>Receiver</th>
+                    <th>Format</th>
+                    <th>Other Procedures</th>
+                    <th>Type of Event</th>
+                    <th>Valid Start Date</th>
+                    <th>Valid End Date</th>
+                    <th>Deadline to Submit</th>
+                </tr>
+                {% for medicament in medicaments_data %}
+                    <tr>
+                        <td>{{ medicament.name }}</td>
+                        <td>{{ medicament.link_to_rule.obligation }}</td>
+                        <td>{{ medicament.link_to_rule.comment }}</td>
+                        <td>{{ medicament.link_to_rule.ae_source_countries }}</td>
+                        <td>{{ medicament.link_to_rule.receiver }}</td>
+                        <td>{{ medicament.link_to_rule.format }}</td>
+                        <td>{{ medicament.link_to_rule.other_procedures }}</td>
+                        <td>{{ medicament.link_to_rule.type_of_event }}</td>
+                        <td>{{ medicament.link_to_rule.valid_start_date }}</td>
+                        <td>{{ medicament.link_to_rule.valid_end_date }}</td>
+                        <td>{{ medicament.link_to_rule.deadline_to_submit }}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+        {% else %}
+            <p class="no-results">No medicaments found in the given text.</p>
+        {% endif %}
+    </div>
+</body>
+</html>

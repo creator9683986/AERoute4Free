@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Medicaments</title>
+
+    <style>
+        body {
+            background-color: #c6f4ff;
+        }
+
+        #LogoName {
+            font-size: 48px;
+            font-family: 'Text Me One', sans-serif;
+            text-shadow: 0px 0px 16.8px #043dde;
+            text-align: center;
+        }
+
+        .textarea-container {
+            text-align: center;
+            box-sizing: border-box;
+            border: 10px;
+            margin-top: 20px;
+        }
+
+        .date-container {
+            border: 2px solid black;
+            padding: 2px;
+            color: white;
+            background-color: #444;
+            border-radius: 4px;
+            width: fit-content;
+        }
+
+        .form-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        .form-group {
+            width: 100%;
+            max-width: 800px;
+            position: relative;
+        }
+
+        .form-control {
+            width: 100%;
+        }
+
+        .action-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            max-width: 800px;
+            margin-top: 10px;
+        }
+
+        .btn-primary {
+            margin-top: 0;
+        }
+    </style>
+    <script>
+        function updateDateTime() {
+            const now = new Date();
+            const day = String(now.getDate()).padStart(2, '0');
+            const month = String(now.getMonth() + 1).padStart(2, '0'); // January is 0!
+            const year = now.getFullYear();
+            document.getElementById("dateTime").textContent = `${day}.${month}.${year}`;
+        }
+
+        setInterval(updateDateTime, 1000);
+        window.onload = updateDateTime; // Initial update on page load
+    </script>
+</head>
+<body>
+    <h1 id="LogoName" class="text">AERoute4Free</h1>
+    <div class="main-container">
+        <div class="form-container">
+            <form method="post" class="mt-3">
+                {% csrf_token %}
+                <div class="form-group">
+                    <textarea name="user_text" class="form-control" rows="10" cols="180" placeholder="Enter text here..."></textarea>
+                </div>
+                <div class="action-container">
+                    <div class="date-container">
+                        Текущая дата: <span id="dateTime">Loading...</span>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Search</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
